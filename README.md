@@ -121,22 +121,41 @@ Expected output if all tests pass:
 ---
 ## Production Considerations
 **Containerization**: A Dockerfile can be used to build a lightweight container image(One is found in root folder).
-```markdown
 **Example Docker usage**:
 ```bash
 docker build -t fibonacci-api .
 docker run -p 8000:8000 fibonacci-api
 ```
-```markdown
-Consideraions: Used python:3.12-slim image for smaller build size and used a `.dockerignore` file to  make builds faster and smaller by ignoring useless local files when building.
+- Used `python:3.12-slim` image for smaller build size
+- `.dockerignore` file created to speed up builds and reduce container size by ignoring unnecessary files.
 
-**Deployment**: Ready for deployment with Gunicorn(for multi threading): 
+**Deployment**
+Ready for deployment with Gunicorn(for concurrency): 
 ```bash
 gunicorn -w 4 -b 0.0.0.0:8000 "main:create_app()"
 ```
-```markdown
-    - **CI/CD**: GitHub Actions or Azure DevOps pipelines can be configured to automate test runs (`pytest`) and Docker image builds on each push.
+**CI/CD**: GitHub Actions or Azure DevOps pipelines can be configured to automate test runs (`pytest`) and Docker image builds on each push.
     Example:
+```yaml
+    name: CI Pipeline
+    on: [push]
+    jobs:
+      build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          pytest -q
+
+```
 
 
 **Monitoring**: Basic logging (`logging.INFO`) is enabled. Can integrate `Prometheus` + `Grafana` and `Loki` for full metrics and logs.
