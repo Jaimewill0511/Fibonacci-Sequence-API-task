@@ -186,7 +186,8 @@ Example:
 - Examples: Kubernetes HPA, Azure App Service auto-scaling, AWS Elastic Beanstalk.
 
 
-**Input Validation**: Guardrails (e.g., n <= 92) are in place to prevent abuse(DDOS Attacks) and ensure 64-bit integer safety.
+**Input Validation**: 
+- Guardrails (e.g., n <= 92) are in place to prevent abuse(DDOS Attacks) and ensure 64-bit integer safety.
 
 **Secrets and Environment Variables**:
 - Sensitive information (e.g., API keys, database URLs) should not be hardcoded.
