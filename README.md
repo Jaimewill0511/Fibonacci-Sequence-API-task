@@ -24,7 +24,7 @@ This API accepts a non-negative integer `n` and returns the nth number in the Fi
 - **Framework**: Flask
 - **Language**: Python 3.12
 - **Container-ready**: Yes (via Docker)
-- **Testing**: Pytest and Postman
+- **Testing**: Pytest and Postman(Postman collection in root folder)
 
 ---
 
