@@ -86,7 +86,11 @@ Postman Test
 **Error Handling:**
 - Missing n 
 - Invalid n (non-integer, negative, or too large)
-  
+
+**Example:**
+```bash
+curl "http://localhost:8000/fibonacci"
+```  
 **Example error response:**
 ```json
 {
@@ -102,6 +106,10 @@ Postman Test
 ```bash
 GET /health
 ```
+**Example:**
+```bash
+curl "http://localhost:8000/health"
+```  
 **Response:**
 ```json
 {
