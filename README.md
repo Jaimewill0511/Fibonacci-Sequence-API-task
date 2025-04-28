@@ -11,6 +11,7 @@ Built with **Python 3.12** and **Flask**, with production-readiness in mind.
 
 ## Table of Contents
 - [Overview](#overview)
+- [Design Decisions](#design-decisions)
 - [How to Run Locally](#how-to-run-locally)
 - [API Usage](#api-usage)
 - [Running Tests](#running-tests)
@@ -25,6 +26,20 @@ This API accepts a non-negative integer `n` and returns the nth number in the Fi
 - **Language**: Python 3.12
 - **Container-ready**: Yes (via Docker)
 - **Testing**: Pytest and Postman(Postman collection in root folder)
+
+---
+
+## Design Decisions
+
+- **Framework**: Chose Flask for simplicity and quick setup within a 3-hour time constraint.
+- **Input Validation**: Limited `n` to a maximum of 92 to avoid 64-bit overflow and prevent potential DoS attacks.
+- **Algorithm**: Used a simple iterative O(n) Fibonacci calculation for clarity and predictability, rather than more complex optimizations.
+- **Containerization**: Added a Dockerfile to demonstrate awareness of production deployment needs and best practices.
+- **Testing**: Included Pytest tests for core functionality to ensure reliability, and provided a Postman collection for easy manual testing.
+- **Deployment**: Provided a sample Gunicorn command to show readiness for scalable, multi-process deployments.
+- **CI/CD**: Included an example GitHub Actions pipeline to demonstrate automation of tests and builds.
+- **Secrets Management Consideration**: Highlighted the importance of managing secrets via environment variables and secret managers in production environments.
+- **Time Management**: Completed within the 3-hour limit as instructed, prioritizing functionality, quality, and production-readiness over extra features.
 
 ---
 
@@ -206,3 +221,4 @@ Example:
 ## Time Management
 
 This project was completed within a 3-hour time-box as per assignment instructions.
+
