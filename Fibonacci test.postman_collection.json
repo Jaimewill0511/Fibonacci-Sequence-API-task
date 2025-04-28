@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "9c60fdd2-b9a7-4ca9-b7d2-ff1b43696a04",
+		"name": "Fibonacci test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12459207",
+		"_collection_link": "https://grey-crescent-787686.postman.co/workspace/BG~12981125-ef22-4e1e-96a2-0b9db13d8f8f/collection/12459207-9c60fdd2-b9a7-4ca9-b7d2-ff1b43696a04?action=share&source=collection_link&creator=12459207"
+	},
+	"item": [
+		{
+			"name": "get request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8000/fibonacci?n=5",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"fibonacci"
+					],
+					"query": [
+						{
+							"key": "n",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8000/health",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
