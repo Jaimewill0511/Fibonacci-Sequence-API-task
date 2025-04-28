@@ -1,4 +1,8 @@
-﻿# Fibonacci-Sequence-API-task
+# Fibonacci-Sequence-API-task
+![Python Version](https://img.shields.io/badge/python-3.12-blue)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 A tiny Flask service that returns the n-th Fibonacci number 
 
 Built with **Python 3.12** and **Flask**, with production-readiness in mind.
@@ -137,7 +141,7 @@ docker run -p 8000:8000 fibonacci-api
 
 **Deployment**
 
-Ready for production deployment with Gunicorn(for concurrency): 
+Ready for production deployment with Gunicorn(for multi-process concurrency): 
 ```bash
 gunicorn -w 4 -b 0.0.0.0:8000 "main:create_app()"
 ```
