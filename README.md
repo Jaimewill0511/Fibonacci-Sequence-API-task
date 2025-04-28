@@ -120,11 +120,26 @@ Expected output if all tests pass:
 ```
 ---
 ## Production Considerations
-**Containerization**: A Dockerfile can be used to build a lightweight container image.
+**Containerization**: A Dockerfile can be used to build a lightweight container image(One is found in root folder).
+```markdown
+**Example Docker usage**:
+```bash
+docker build -t fibonacci-api .
+docker run -p 8000:8000 fibonacci-api
+```
+```markdown
+Consideraions: Used python:3.12-slim image for smaller build size and used a `.dockerignore` file to  make builds faster and smaller by ignoring useless local files when building.
 
-**Deployment**: Ready for deployment with Gunicorn (e.g., gunicorn -w 4 -b 0.0.0.0:8000 "main:create_app()").
+**Deployment**: Ready for deployment with Gunicorn(for multi threading): 
+```bash
+gunicorn -w 4 -b 0.0.0.0:8000 "main:create_app()"
+```
+```markdown
+    - **CI/CD**: GitHub Actions or Azure DevOps pipelines can be configured to automate test runs (`pytest`) and Docker image builds on each push.
+    Example:
 
-**Monitoring**: Basic logging (logging.INFO) is enabled. Can integrate Prometheus + Grafana for full metrics.
+
+**Monitoring**: Basic logging (`logging.INFO`) is enabled. Can integrate `Prometheus` + `Grafana` and `Loki` for full metrics and logs.
 
 **Scaling**: Stateless API; can be horizontally scaled behind a load balancer (e.g., Azure App Service, Kubernetes HPA).
 

@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 import logging; logging.basicConfig(level=logging.INFO)
 
+
+MAX_N = 92  # keep the 64-bit-safe guardrail
+
 def create_app():
     app = Flask(__name__)
 
@@ -12,15 +15,17 @@ def create_app():
     
     @app.route("/health")
     def health():
-        return jsonify(status="healthy"), 200
+        return jsonify(status="healthy"), 200 # health check endpoint
 
 
     @app.route("/fibonacci")
     def fibonacci_endpoint():
+        # param missing
+        if "n" not in request.args:
+            return jsonify(error="query param 'n' is required"), 400
+
         try:
             n = int(request.args["n"])
-            if n is None:
-                return jsonify(error="query param 'n' is required and must be an integer"), 400 # check if n is not None
             
         except (KeyError, ValueError):
             return jsonify(error="query param 'n' must be an integer"), 400 # check if n is an integer
@@ -29,8 +34,9 @@ def create_app():
         if n < 0:
             return jsonify(error="Parameter 'n' must be a non-negative integer"), 400 # check if n is non-negative
         
-        if n < 0 or n > 92:
-             return jsonify(error="n must be between 0 and 92"), 400 # check if n is in the range of 0 to 92 to avoid overflow and performance issues(e,g DOS attacks)
+         # too large
+        if n > MAX_N:
+            return jsonify(error=f"Parameter 'n' exceeds maximum allowed value ({MAX_N})"), 400 # check if n is in the range of 0 to 92 to avoid overflow and performance issues(e,g DOS attacks)
         
         logging.info("Request handled: n=%s", n) # log the request for debugging purposes
         return jsonify(n=n, fibonacci=fibonacci_sequence(n))
