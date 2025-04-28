@@ -1,5 +1,6 @@
 ﻿# Fibonacci-Sequence-API-task
 A tiny Flask service that returns the n-th Fibonacci number 
+
 Built with **Python 3.12** and **Flask**, with production-readiness in mind.
 
 ---
