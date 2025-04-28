@@ -66,7 +66,7 @@ GET /fibonacci?n=<integer>
 curl "http://localhost:8000/fibonacci?n=10"
 ```
 **Response:**
-```bash
+```json
 {
   "n": 10,
   "fibonacci": 55
@@ -83,7 +83,7 @@ Postman Test
 - Invalid n (non-integer, negative, or too large)
   
 **Example error response:**
-```bash
+```json
 {
   "error": "query param 'n' is required"
 }
@@ -98,7 +98,7 @@ Postman Test
 GET /health
 ```
 **Response:**
-```bash
+```json
 {
   "status": "healthy"
 }
@@ -115,12 +115,15 @@ python -m pytest -q
 ```
 Expected output if all tests pass:
 ```bash
-.....                                                                                                                                                                                                                                                                                                                 [100%]
+.....                                                                                                      [100%]
 5 passed in 0.13s
 ```
 ---
 ## Production Considerations
-**Containerization**: A Dockerfile can be used to build a lightweight container image(One is found in root folder).
+
+
+**Containerization**
+A Dockerfile is available at the root of the project.
 **Example Docker usage**:
 ```bash
 docker build -t fibonacci-api .
@@ -129,38 +132,49 @@ docker run -p 8000:8000 fibonacci-api
 - Used `python:3.12-slim` image for smaller build size
 - `.dockerignore` file created to speed up builds and reduce container size by ignoring unnecessary files.
 
+
 **Deployment**
-Ready for deployment with Gunicorn(for concurrency): 
+Ready for production deployment with Gunicorn(for concurrency): 
 ```bash
 gunicorn -w 4 -b 0.0.0.0:8000 "main:create_app()"
 ```
-**CI/CD**: GitHub Actions or Azure DevOps pipelines can be configured to automate test runs (`pytest`) and Docker image builds on each push.
-    Example:
+
+**CI/CD**
+GitHub Actions or Azure DevOps pipelines can be configured to automate test runs (`pytest`) and Docker image builds on each push.
+Example:
 ```yaml
     name: CI Pipeline
     on: [push]
     jobs:
       build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-      - name: Run tests
-        run: |
-          pytest -q
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4
+          - name: Set up Python
+            uses: actions/setup-python@v5
+            with:
+              python-version: '3.12'
+          - name: Install dependencies
+            run: |
+              pip install -r requirements.txt
+          - name: Run tests
+            run: |
+              pytest -q
 
 ```
 
+**Monitoring**: 
 
-**Monitoring**: Basic logging (`logging.INFO`) is enabled. Can integrate `Prometheus` + `Grafana` and `Loki` for full metrics and logs.
+- Basic application logging is enabled with `logging.INFO`
+  Example logs:
+  ![image](https://github.com/user-attachments/assets/d1030daa-6100-46ae-b95e-ac3990fbe028)
+- In production, Prometheus metrics and Grafana dashboards could be added for observability.
+- Loki can be used for centralized log collection.
 
-**Scaling**: Stateless API; can be horizontally scaled behind a load balancer (e.g., Azure App Service, Kubernetes HPA).
+**Scaling**: 
+- The API is stateless and can be horizontally scaled easily behind a load balancer.
+- Examples: Kubernetes HPA, Azure App Service auto-scaling, AWS Elastic Beanstalk.
+
 
 **Input Validation**: Guardrails (e.g., n <= 92) are in place to prevent abuse(DDOS Attacks) and ensure 64-bit integer safety.
 
