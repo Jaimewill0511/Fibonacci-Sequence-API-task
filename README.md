@@ -1,4 +1,4 @@
-# Fibonacci-Sequence-API-task
+﻿# Fibonacci-Sequence-API-task
 ![Python Version](https://img.shields.io/badge/python-3.12-blue)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -168,7 +168,9 @@ Example:
           - name: Run tests
             run: |
               pytest -q
-
+          - name: Build Docker image
+            run: |
+              docker build -t fibonacci-api .
 ```
 
 **Monitoring**: 
@@ -186,3 +188,12 @@ Example:
 
 **Input Validation**: Guardrails (e.g., n <= 92) are in place to prevent abuse(DDOS Attacks) and ensure 64-bit integer safety.
 
+**Secrets and Environment Variables**:
+- Sensitive information (e.g., API keys, database URLs) should not be hardcoded.
+- Environment variables or secret managers (Azure Key Vault, etc.) should be used for secure secret handling.
+- `.env` files must be listed in `.gitignore` and excluded from version control.
+
+
+## Time Management
+
+This project was completed within a 3-hour time-box as per assignment instructions.
