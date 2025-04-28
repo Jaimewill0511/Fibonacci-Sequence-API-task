@@ -123,6 +123,7 @@ Expected output if all tests pass:
 
 
 **Containerization**
+
 A Dockerfile is available at the root of the project.
 **Example Docker usage**:
 ```bash
@@ -134,12 +135,14 @@ docker run -p 8000:8000 fibonacci-api
 
 
 **Deployment**
+
 Ready for production deployment with Gunicorn(for concurrency): 
 ```bash
 gunicorn -w 4 -b 0.0.0.0:8000 "main:create_app()"
 ```
 
 **CI/CD**
+
 GitHub Actions or Azure DevOps pipelines can be configured to automate test runs (`pytest`) and Docker image builds on each push.
 Example:
 ```yaml
