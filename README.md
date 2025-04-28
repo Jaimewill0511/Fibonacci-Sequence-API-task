@@ -72,6 +72,12 @@ curl "http://localhost:8000/fibonacci?n=10"
   "fibonacci": 55
 }
 ```
+Postman Test
+![image](https://github.com/user-attachments/assets/f05c7a3a-b7e5-4319-8a25-44185def02e2)
+
+
+
+
 **Error Handling:**
 - Missing n 
 - Invalid n (non-integer, negative, or too large)
@@ -82,6 +88,9 @@ curl "http://localhost:8000/fibonacci?n=10"
   "error": "query param 'n' is required"
 }
 ```
+Postman Test
+![image](https://github.com/user-attachments/assets/cefdc2bc-2b4d-4ffa-bda2-c4a81345b4f8)
+
 
 ### 2. Health Check
 **Endpoint:**
@@ -94,6 +103,9 @@ GET /health
   "status": "healthy"
 }
 ```
+Postman Test
+![image](https://github.com/user-attachments/assets/3683aa0a-089f-4865-afa5-3f0e8d795322)
+
 ---
 ## Running Tests 
 Make sure dependencies are installed first.
